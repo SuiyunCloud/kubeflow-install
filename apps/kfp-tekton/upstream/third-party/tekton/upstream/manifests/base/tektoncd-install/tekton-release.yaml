@@ -1779,7 +1779,7 @@ spec:
       serviceAccountName: tekton-pipelines-controller
       containers:
         - name: tekton-pipelines-controller
-          image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.27.0@sha256:015e8f9cf38416652545ce5e16776379a979af64373250ec489861886a468fcf
+          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/tekton-releases_github.com_tektoncd_pipeline_cmd_controller:v0.27.0@sha256
           args: [
             # These images.csv are built on-demand by `ko resolve` and are replaced
             # by image references by digest.

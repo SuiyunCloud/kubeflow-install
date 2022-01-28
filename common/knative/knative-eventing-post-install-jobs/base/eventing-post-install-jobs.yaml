@@ -54,7 +54,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: pingsource
-          image: gcr.io/knative-releases/knative.dev/eventing/cmd/v0.22/pingsource-cleanup@sha256:837b8d5cfe38afa297d25e7aed30ec8df80f721a084d4fdcc614d65afde4c528
+          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_eventing_cmd_v0.22_pingsource-c:837b8d5cfe38afa297d25e7aed30ec8df80f721a084d4fdcc614d65afde4c528
           env:
             - name: SYSTEM_NAMESPACE
               valueFrom:

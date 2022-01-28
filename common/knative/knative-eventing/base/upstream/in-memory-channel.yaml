@@ -718,7 +718,7 @@ spec:
       enableServiceLinks: false
       containers:
         - name: controller
-          image: gcr.io/knative-releases/knative.dev/eventing/cmd/in_memory/channel_controller@sha256:904f42a768a9bc64999e7302d2bc7c1c48a08e74a82355cf57be513e6a124b82
+          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_eventing_cmd_in_memory_channel_:904f42a768a9bc64999e7302d2bc7c1c48a08e74a82355cf57be513e6a124b82
           env:
             - name: CONFIG_LOGGING_NAME
               value: config-logging

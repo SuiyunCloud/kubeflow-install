@@ -15,7 +15,7 @@ spec:
     spec:
       hostNetwork: true
       containers:
-      - image: gcr.io/ml-pipeline/inverse-proxy-agent:dummy
+      - image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/ml-pipeline_inverse-proxy-agent:dummy
         imagePullPolicy: IfNotPresent
         name: proxy-agent
       serviceAccountName: proxy-agent-runner

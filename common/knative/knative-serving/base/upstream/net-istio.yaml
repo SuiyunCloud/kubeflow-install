@@ -229,7 +229,7 @@ spec:
       serviceAccountName: controller
       containers:
         - name: networking-istio
-          image: gcr.io/knative-releases/knative.dev/net-istio/cmd/controller@sha256:ff8680da52ef47b8573ebc3393cbfa2f0f14b05c1e02232807f22699adbef57a
+          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_net-istio_cmd_controller@sha256:ff8680da52ef47b8573ebc3393cbfa2f0f14b05c1e02232807f22699adbef57a
           resources:
             requests:
               cpu: 30m

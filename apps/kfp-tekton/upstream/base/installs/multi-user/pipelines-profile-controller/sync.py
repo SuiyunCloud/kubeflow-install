@@ -36,7 +36,7 @@ def get_settings_from_env(controller_port=None,
     Settings are pulled from the all-caps version of the setting name.  The
     following defaults are used if those environment variables are not set
     to enable backwards compatibility with previous versions of this script:
-        visualization_server_image: gcr.io/ml-pipeline/visualization-server
+        visualization_server_image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/ml-pipeline_visualization-server
         visualization_server_tag: value of KFP_VERSION environment variable
         frontend_image: gcr.io/ml-pipeline/frontend
         frontend_tag: value of KFP_VERSION environment variable
@@ -51,7 +51,7 @@ def get_settings_from_env(controller_port=None,
 
     settings["visualization_server_image"] = \
         visualization_server_image or \
-        os.environ.get("VISUALIZATION_SERVER_IMAGE", "gcr.io/ml-pipeline/visualization-server")
+        os.environ.get("VISUALIZATION_SERVER_IMAGE", "registry.cn-beijing.aliyuncs.com/kubeflow1_4/ml-pipeline_visualization-server")
 
     settings["frontend_image"] = \
         frontend_image or \
