@@ -651,7 +651,7 @@ metadata:
   labels:
     serving.knative.dev/release: "v0.22.1"
 spec:
-  image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_serving_cmd_queue@sha256:0b8e031170354950f3395876961452af1c62f7ab5161c9e71867392c11881962
+  image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_serving_cmd_queue:0b8e031170354950f3395876961452af1c62f7ab5161c9e71867392c11881962
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -972,7 +972,7 @@ metadata:
   annotations:
     knative.dev/example-checksum: "fa67b403"
 data:
-  queueSidecarImage: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_serving_cmd_queue@sha256:0b8e031170354950f3395876961452af1c62f7ab5161c9e71867392c11881962
+  queueSidecarImage: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_serving_cmd_queue:0b8e031170354950f3395876961452af1c62f7ab5161c9e71867392c11881962
   _example: |
     ################################
     #                              #

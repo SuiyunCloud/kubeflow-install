@@ -12,6 +12,9 @@ if __name__ == '__main__':
                 name = image.replace('gcr.io/', '').replace(f':', '_').replace('/', '_')
                 dockerfile_name = f'Dockerfile_{name.strip()}'
 
+                if "@" in dockerfile_name:
+                    dockerfile_name = dockerfile_name.split('@')[0]
+
                 # ali dockerfile name limit
                 if len(dockerfile_name) > 60:
                     dockerfile_name = dockerfile_name[:60]
@@ -22,5 +25,8 @@ if __name__ == '__main__':
                 image_name = image.split(":")[0].replace("gcr.io/", "").replace("/", "_")
                 if len(image_name) > 60:
                     image_name = image_name[:60]
+
+                if "@" in image_name:
+                    image_name = image_name.split('@')[0]
 
                 df_list.write(f'{dockerfile_name},{version},{image_name.strip()},' + line)

@@ -472,7 +472,7 @@ spec:
       containers:
         - name: eventing-controller
           terminationMessagePolicy: FallbackToLogsOnError
-          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_eventing_cmd_controller@sha256:6ddffbc286a84048cfd090193d00b4ecda25a3a7bf2de1a8e873f8b3755cc913
+          image: registry.cn-beijing.aliyuncs.com/kubeflow1_4/knative-releases_knative.dev_eventing_cmd_controller:6ddffbc286a84048cfd090193d00b4ecda25a3a7bf2de1a8e873f8b3755cc913
           resources:
             requests:
               cpu: 100m
