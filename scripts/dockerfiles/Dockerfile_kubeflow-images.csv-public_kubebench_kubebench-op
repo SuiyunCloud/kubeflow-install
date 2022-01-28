@@ -1,0 +1,1 @@
+FROM gcr.io/kubeflow-images.csv-public/kubebench/kubebench-operator-v1alpha2
