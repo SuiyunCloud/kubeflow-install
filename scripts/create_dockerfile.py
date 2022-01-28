@@ -25,6 +25,8 @@ if __name__ == '__main__':
                 image_name = image.split(":")[0].replace("gcr.io/", "").replace("/", "_")
                 if len(image_name) > 60:
                     image_name = image_name[:60]
+                    if '_' == image_name[-1]:
+                        image_name = image_name[:-1]
 
                 if "@" in image_name:
                     image_name = image_name.split('@')[0]
