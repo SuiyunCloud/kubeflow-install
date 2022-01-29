@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
-  - name: gcr.io/ml-pipeline/inverse-proxy-agent
+  - name: registry.cn-beijing.aliyuncs.com/kubeflow1_4/ml-pipeline_inverse-proxy-agent
     newTag: 1.7.0
 resources:
   - proxy-configmap.yaml

@@ -57,6 +57,6 @@ images:
     newTag: 1.7.0
   - name: gcr.io/ml-pipeline/visualization-server
     newTag: 1.7.0
-  - name: gcr.io/ml-pipeline/metadata-writer
+  - name: registry.cn-beijing.aliyuncs.com/kubeflow1_4/ml-pipeline_metadata-writer
     newName: docker.io/aipipeline/metadata-writer
     newTag: 1.0.0
