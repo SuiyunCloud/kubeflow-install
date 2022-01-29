@@ -4,6 +4,12 @@ kubeflow很多镜像无法下载, 本repo把google的image替换为放在aliyun.
 在scrits文件夹中，list_gcr_image.py从相关文件中找出gcr.io的镜像
 create_dockerfile生成每个镜像对应的dockerfile，这些dockerfile将用在阿里云镜像仓库中，在海外build镜像保存在阿里云上。从而可以从国内拉取相关镜像。
 
+脚本可以处理大部分的镜像，部分dummy后缀的镜像需要根据上下文找到实际的版本号
+
+这个镜像找不到
+gcr.io/kubeflow-images.csv-public/kubebench/kubebench-operator-v1alpha2:bc682c1
+https://cr.console.aliyun.com/repository/cn-beijing/kubeflow1_4/kubeflow-images.csv-public_kubebench_kubebench-operator-v1al/build
+
 
 
 
