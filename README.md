@@ -126,7 +126,7 @@ If all the following commands are executed, the result is the same as in the abo
 - Provide a description of each component and insight on how it gets installed.
 - Enable the user or distribution owner to pick and choose only the components they need.
 
-#### cert-manager
+#### cert-manager Done
 
 cert-manager is used by many Kubeflow components to provide certificates for
 admission webhooks.
@@ -138,20 +138,19 @@ kustomize build common/cert-manager/cert-manager/base | kubectl apply -f -
 kustomize build common/cert-manager/kubeflow-issuer/base | kubectl apply -f -
 ```
 
-#### Istio
+#### Istio Done
 
 Istio is used by many Kubeflow components to secure their traffic, enforce
 network authorization and implement routing policies.
 
 Install Istio:
-
 ```sh
 kustomize build common/istio-1-9/istio-crds/base | kubectl apply -f -
 kustomize build common/istio-1-9/istio-namespace/base | kubectl apply -f -
 kustomize build common/istio-1-9/istio-install/base | kubectl apply -f -
 ```
 
-#### Dex
+#### Dex Done
 
 Dex is an OpenID Connect Identity (OIDC) with multiple authentication backends. In this default installation, it includes a static user with email `user@example.com`. By default, the user's password is `12341234`. For any production Kubeflow deployment, you should change the default password by following [the relevant section](#change-default-user-password).
 
@@ -161,7 +160,7 @@ Install Dex:
 kustomize build common/dex/overlays/istio | kubectl apply -f -
 ```
 
-#### OIDC AuthService
+#### OIDC AuthService Done
 
 The OIDC AuthService extends your Istio Ingress-Gateway capabilities, to be able to function as an OIDC client:
 
@@ -186,7 +185,7 @@ Optionally, you can install Knative Eventing which can be used for inference req
 kustomize build common/knative/knative-eventing/base | kubectl apply -f -
 ```
 
-#### Kubeflow Namespace
+#### Kubeflow Namespace Done
 
 Create the namespace where the Kubeflow components will live in. This namespace
 is named `kubeflow`.
@@ -197,7 +196,7 @@ Install kubeflow namespace:
 kustomize build common/kubeflow-namespace/base | kubectl apply -f -
 ```
 
-#### Kubeflow Roles
+#### Kubeflow Roles Done
 
 Create the Kubeflow ClusterRoles, `kubeflow-view`, `kubeflow-edit` and
 `kubeflow-admin`. Kubeflow components aggregate permissions to these
@@ -209,7 +208,7 @@ Install kubeflow roles:
 kustomize build common/kubeflow-roles/base | kubectl apply -f -
 ```
 
-#### Kubeflow Istio Resources
+#### Kubeflow Istio Resources Done
 
 Create the Istio resources needed by Kubeflow. This kustomization currently
 creates an Istio Gateway named `kubeflow-gateway`, in namespace `kubeflow`.
@@ -273,7 +272,7 @@ Install the Katib official Kubeflow component:
 kustomize build apps/katib/upstream/installs/katib-with-kubeflow | kubectl apply -f -
 ```
 
-#### Central Dashboard
+#### Central Dashboard Done
 
 Install the Central Dashboard official Kubeflow component:
 
@@ -281,7 +280,7 @@ Install the Central Dashboard official Kubeflow component:
 kustomize build apps/centraldashboard/upstream/overlays/istio | kubectl apply -f -
 ```
 
-#### Admission Webhook
+#### Admission Webhook Done
 
 Install the Admission Webhook for PodDefaults:
 
@@ -289,7 +288,7 @@ Install the Admission Webhook for PodDefaults:
 kustomize build apps/admission-webhook/upstream/overlays/cert-manager | kubectl apply -f -
 ```
 
-#### Notebooks
+#### Notebooks  Done
 
 Install the Notebook Controller official Kubeflow component:
 
@@ -303,7 +302,7 @@ Install the Jupyter Web App official Kubeflow component:
 kustomize build apps/jupyter/jupyter-web-app/upstream/overlays/istio | kubectl apply -f -
 ```
 
-#### Profiles + KFAM
+#### Profiles + KFAM Done
 
 Install the Profile Controller and the Kubeflow Access-Management (KFAM) official Kubeflow
 components:
@@ -312,7 +311,7 @@ components:
 kustomize build apps/profiles/upstream/overlays/kubeflow | kubectl apply -f -
 ```
 
-#### Volumes Web App
+#### Volumes Web App Done
 
 Install the Volumes Web App official Kubeflow component:
 
@@ -320,7 +319,7 @@ Install the Volumes Web App official Kubeflow component:
 kustomize build apps/volumes-web-app/upstream/overlays/istio | kubectl apply -f -
 ```
 
-#### Tensorboard
+#### Tensorboard Done
 
 Install the Tensorboards Web App official Kubeflow component:
 
@@ -334,7 +333,7 @@ Install the Tensorboard Controller official Kubeflow component:
 kustomize build apps/tensorboard/tensorboard-controller/upstream/overlays/kubeflow | kubectl apply -f -
 ```
 
-#### Training Operator
+#### Training Operator Done
 
 Install the Training Operator official Kubeflow component:
 
@@ -342,7 +341,7 @@ Install the Training Operator official Kubeflow component:
 kustomize build apps/training-operator/upstream/overlays/kubeflow | kubectl apply -f -
 ```
 
-#### MPI Operator
+#### MPI Operator Done
 
 Install the MPI Operator official Kubeflow component:
 
@@ -350,7 +349,7 @@ Install the MPI Operator official Kubeflow component:
 kustomize build apps/mpi-job/upstream/overlays/kubeflow | kubectl apply -f -
 ```
 
-#### User Namespace
+#### User Namespace Done
 
 Finally, create a new namespace for the the default user (named `kubeflow-user-example-com`).
 
@@ -397,6 +396,22 @@ Exposing your Kubeflow cluster with proper HTTPS is a process heavily dependent 
 If you absolutely need to expose Kubeflow over HTTP, you can disable the `Secure Cookies` feature by setting the `APP_SECURE_COOKIES` environment variable to `false` in every relevant web app. This is not recommended, as it poses security risks.
 
 ---
+
+#### 设置Https访问
+如果要通过 NodePort / LoadBalancer / Ingress 暴露服务到非 localhost 网络，那么必须使用 https。否则能打开主页面但是 notebook、ssh等均无法连接。
+进入certs目录，执行
+```sh
+    chmod +x create_self-signed-cert.sh
+    ./create_self-signed-cert.sh --ssl-domain=kubeflow.cn
+    kubectl create --namespace istio-system secret tls kf-tls-cert --key kubeflow.cn.key --cert kubeflow.cn.crt
+     
+    kubectl edit cm config-domain --namespace knative-serving
+    #在 data 下面添加：kubeflow.cn: ""
+
+    kubectl apply -f kubeflow-https.yaml
+    kubectl -n istio-system get service istio-ingressgateway
+```
+
 
 ### Change default user password
 
